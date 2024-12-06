@@ -1,6 +1,7 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://ci4jjclvoqnag"]
+[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://ci4jjclvoqnag"]
 
 [ext_resource type="Texture2D" uid="uid://c1uy7765n88ea" path="res://art/world.png" id="1_5ilsh"]
+[ext_resource type="Texture2D" uid="uid://5xyqm78olyge" path="res://art/ui.png" id="2_gwxd2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hjv33"]
 texture = ExtResource("1_5ilsh")
@@ -1919,6 +1920,11 @@ texture_region_size = Vector2i(24, 24)
 25:39/0 = 0
 26:39/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_32pf7"]
+texture = ExtResource("2_gwxd2")
+texture_region_size = Vector2i(24, 24)
+0:0/0 = 0
+
 [resource]
 tile_size = Vector2i(24, 24)
 terrain_set_0/mode = 0
@@ -1927,3 +1933,4 @@ terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 terrain_set_0/terrain_1/name = "dungeon"
 terrain_set_0/terrain_1/color = Color(0.5, 0.4375, 0.25, 1)
 sources/0 = SubResource("TileSetAtlasSource_hjv33")
+sources/1 = SubResource("TileSetAtlasSource_32pf7")
