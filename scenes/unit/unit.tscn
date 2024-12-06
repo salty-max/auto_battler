@@ -1,13 +1,16 @@
-[gd_scene load_steps=11 format=3 uid="uid://dadkgrrej4p0w"]
+[gd_scene load_steps=14 format=3 uid="uid://dadkgrrej4p0w"]
 
 [ext_resource type="Script" path="res://scenes/unit/unit.gd" id="1_bm661"]
 [ext_resource type="Texture2D" uid="uid://c1uy7765n88ea" path="res://art/world.png" id="2_3srey"]
 [ext_resource type="Resource" uid="uid://cl8p0vnw0h1mx" path="res://data/units/dwarf/dwarf.tres" id="2_inl7w"]
 [ext_resource type="SpriteFrames" uid="uid://4g537rpfyayw" path="res://resources/units/dwarf.tres" id="2_jvq8n"]
+[ext_resource type="Material" uid="uid://d3l38sjp3xwi4" path="res://resources/shaders/2d_outline_shader.tres" id="3_bv3ea"]
 [ext_resource type="StyleBox" uid="uid://blkoveq2i7hlg" path="res://resources/styleboxes/unit_bar_background.tres" id="3_qndxa"]
 [ext_resource type="StyleBox" uid="uid://p6d7lbmrvcbu" path="res://resources/styleboxes/health_bar_fill.tres" id="4_3t6x7"]
 [ext_resource type="StyleBox" uid="uid://c86w6f0u6svh1" path="res://resources/styleboxes/mana_bar_fill.tres" id="5_khjav"]
 [ext_resource type="Script" path="res://components/drag_and_drop.gd" id="8_77i3v"]
+[ext_resource type="Script" path="res://components/velocity_based_rotation.gd" id="9_kyrw8"]
+[ext_resource type="Script" path="res://components/outline_highlighter.gd" id="11_86e0m"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rtnys"]
 atlas = ExtResource("2_3srey")
@@ -19,17 +22,21 @@ size = Vector2(28, 28)
 [node name="Unit" type="Area2D"]
 script = ExtResource("1_bm661")
 stats = ExtResource("2_inl7w")
+metadata/_edit_group_ = true
 
-[node name="Skin" type="AnimatedSprite2D" parent="."]
-z_index = 1
+[node name="Visuals" type="CanvasGroup" parent="."]
+material = ExtResource("3_bv3ea")
+
+[node name="Shadow" type="Sprite2D" parent="Visuals"]
+position = Vector2(12, 13)
+texture = SubResource("AtlasTexture_rtnys")
+
+[node name="Skin" type="AnimatedSprite2D" parent="Visuals"]
+unique_name_in_owner = true
 position = Vector2(12, 8)
 sprite_frames = ExtResource("2_jvq8n")
 animation = &"active"
 autoplay = "idle"
-
-[node name="Shadow" type="Sprite2D" parent="."]
-position = Vector2(12, 13)
-texture = SubResource("AtlasTexture_rtnys")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(12, 8)
@@ -39,6 +46,7 @@ shape = SubResource("RectangleShape2D_twn7j")
 position = Vector2(0, -11)
 
 [node name="HealthBar" type="ProgressBar" parent="GUI"]
+unique_name_in_owner = true
 offset_right = 24.0
 offset_bottom = 4.0
 theme_override_styles/background = ExtResource("3_qndxa")
@@ -47,6 +55,7 @@ value = 60.0
 show_percentage = false
 
 [node name="ManaBar" type="ProgressBar" parent="GUI"]
+unique_name_in_owner = true
 offset_top = 3.0
 offset_right = 24.0
 offset_bottom = 7.0
@@ -59,3 +68,18 @@ show_percentage = false
 script = ExtResource("8_77i3v")
 enabled = true
 target = NodePath("..")
+
+[node name="VelocityBasedRotation" type="Node" parent="." node_paths=PackedStringArray("target")]
+script = ExtResource("9_kyrw8")
+target = NodePath("../Visuals/Skin")
+lerp_seconds = 0.5
+max_rotation_degrees = 30
+
+[node name="OutlineHighlighter" type="Node" parent="." node_paths=PackedStringArray("visuals")]
+script = ExtResource("11_86e0m")
+visuals = NodePath("../Visuals")
+outline_color = Color(1, 1, 1, 1)
+outline_thickness = 1
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
