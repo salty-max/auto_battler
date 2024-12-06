@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="UnitStats" load_steps=3 format=3 uid="uid://btbcyq1qsmed4"]
+
+[ext_resource type="Script" path="res://data/units/unit_stats.gd" id="1_dj4x6"]
+[ext_resource type="SpriteFrames" uid="uid://blewab31cws3u" path="res://units/mage/mage.tres" id="2_d32ej"]
+
+[resource]
+script = ExtResource("1_dj4x6")
+name = &"Mage"
+rarity = 0
+cost = 1
+skin = ExtResource("2_d32ej")

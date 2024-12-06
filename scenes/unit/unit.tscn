@@ -1,0 +1,61 @@
+[gd_scene load_steps=11 format=3 uid="uid://dadkgrrej4p0w"]
+
+[ext_resource type="Script" path="res://scenes/unit/unit.gd" id="1_bm661"]
+[ext_resource type="Texture2D" uid="uid://c1uy7765n88ea" path="res://art/world.png" id="2_3srey"]
+[ext_resource type="Resource" uid="uid://cl8p0vnw0h1mx" path="res://data/units/dwarf/dwarf.tres" id="2_inl7w"]
+[ext_resource type="SpriteFrames" uid="uid://4g537rpfyayw" path="res://resources/units/dwarf.tres" id="2_jvq8n"]
+[ext_resource type="StyleBox" uid="uid://blkoveq2i7hlg" path="res://resources/styleboxes/unit_bar_background.tres" id="3_qndxa"]
+[ext_resource type="StyleBox" uid="uid://p6d7lbmrvcbu" path="res://resources/styleboxes/health_bar_fill.tres" id="4_3t6x7"]
+[ext_resource type="StyleBox" uid="uid://c86w6f0u6svh1" path="res://resources/styleboxes/mana_bar_fill.tres" id="5_khjav"]
+[ext_resource type="Script" path="res://components/drag_and_drop.gd" id="8_77i3v"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rtnys"]
+atlas = ExtResource("2_3srey")
+region = Rect2(1008, 888, 24, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_twn7j"]
+size = Vector2(28, 28)
+
+[node name="Unit" type="Area2D"]
+script = ExtResource("1_bm661")
+stats = ExtResource("2_inl7w")
+
+[node name="Skin" type="AnimatedSprite2D" parent="."]
+z_index = 1
+position = Vector2(12, 8)
+sprite_frames = ExtResource("2_jvq8n")
+animation = &"active"
+autoplay = "idle"
+
+[node name="Shadow" type="Sprite2D" parent="."]
+position = Vector2(12, 13)
+texture = SubResource("AtlasTexture_rtnys")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(12, 8)
+shape = SubResource("RectangleShape2D_twn7j")
+
+[node name="GUI" type="Node2D" parent="."]
+position = Vector2(0, -11)
+
+[node name="HealthBar" type="ProgressBar" parent="GUI"]
+offset_right = 24.0
+offset_bottom = 4.0
+theme_override_styles/background = ExtResource("3_qndxa")
+theme_override_styles/fill = ExtResource("4_3t6x7")
+value = 60.0
+show_percentage = false
+
+[node name="ManaBar" type="ProgressBar" parent="GUI"]
+offset_top = 3.0
+offset_right = 24.0
+offset_bottom = 7.0
+theme_override_styles/background = ExtResource("3_qndxa")
+theme_override_styles/fill = ExtResource("5_khjav")
+value = 40.0
+show_percentage = false
+
+[node name="DragAndDrop" type="Node" parent="." node_paths=PackedStringArray("target")]
+script = ExtResource("8_77i3v")
+enabled = true
+target = NodePath("..")

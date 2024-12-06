@@ -1,7 +1,9 @@
-[gd_scene load_steps=7 format=4 uid="uid://c7po0bvkpny7r"]
+[gd_scene load_steps=9 format=4 uid="uid://c7po0bvkpny7r"]
 
+[ext_resource type="Script" path="res://scenes/arena/arena.gd" id="1_lfpdc"]
 [ext_resource type="TileSet" uid="uid://ci4jjclvoqnag" path="res://resources/tilesets/tileset.tres" id="1_mj7k1"]
 [ext_resource type="Texture2D" uid="uid://vdmaywa3xflt" path="res://art/fx.png" id="2_6rot1"]
+[ext_resource type="PackedScene" uid="uid://dadkgrrej4p0w" path="res://scenes/unit/unit.tscn" id="4_inhep"]
 
 [sub_resource type="Curve" id="Curve_jc1be"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.252055, 1), 0.0, 0.0, 0, 0, Vector2(0.745206, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -30,6 +32,7 @@ atlas = ExtResource("2_6rot1")
 region = Rect2(24, 144, 24, 24)
 
 [node name="Arena" type="Node2D"]
+script = ExtResource("1_lfpdc")
 metadata/_edit_lock_ = true
 
 [node name="Visuals" type="Node2D" parent="."]
@@ -75,3 +78,6 @@ metadata/_edit_lock_ = true
 
 [node name="Highlight" type="TileMapLayer" parent="Bench"]
 tile_set = ExtResource("1_mj7k1")
+
+[node name="Unit" parent="." instance=ExtResource("4_inhep")]
+position = Vector2(336, 120)

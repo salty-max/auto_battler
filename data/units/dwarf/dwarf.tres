@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="UnitStats" load_steps=3 format=3 uid="uid://cl8p0vnw0h1mx"]
+
+[ext_resource type="Script" path="res://data/units/unit_stats.gd" id="1_moilj"]
+[ext_resource type="SpriteFrames" uid="uid://4g537rpfyayw" path="res://resources/units/dwarf.tres" id="2_tjjvy"]
+
+[resource]
+script = ExtResource("1_moilj")
+name = &"Dwarf"
+rarity = 0
+cost = 1
+skin = ExtResource("2_tjjvy")
