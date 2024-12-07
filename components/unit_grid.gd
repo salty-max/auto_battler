@@ -9,8 +9,8 @@ var units: Dictionary
 
 
 func _ready() -> void:
-	for row in size.y:
-		for col in size.x:
+	for col in size.x:
+		for row in size.y:
 			units[Vector2i(col, row)] = null
 	#_debug()
 

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="UnitStats" load_steps=3 format=3 uid="uid://bbc7y8bh0l8x6"]
+
+[ext_resource type="Script" path="res://data/units/unit_stats.gd" id="1_tcye4"]
+[ext_resource type="SpriteFrames" uid="uid://c4meamey7gkx" path="res://resources/units/butcher.tres" id="2_r13h8"]
+
+[resource]
+script = ExtResource("1_tcye4")
+name = &""
+rarity = 1
+cost = 1
+skin = ExtResource("2_r13h8")

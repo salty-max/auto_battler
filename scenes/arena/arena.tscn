@@ -1,17 +1,13 @@
-[gd_scene load_steps=20 format=4 uid="uid://c7po0bvkpny7r"]
+[gd_scene load_steps=13 format=4 uid="uid://c7po0bvkpny7r"]
 
 [ext_resource type="Script" path="res://scenes/arena/arena.gd" id="1_lfpdc"]
 [ext_resource type="TileSet" uid="uid://ci4jjclvoqnag" path="res://resources/tilesets/tileset.tres" id="1_mj7k1"]
 [ext_resource type="Texture2D" uid="uid://vdmaywa3xflt" path="res://art/fx.png" id="2_6rot1"]
-[ext_resource type="PackedScene" uid="uid://dadkgrrej4p0w" path="res://scenes/unit/unit.tscn" id="4_inhep"]
 [ext_resource type="Script" path="res://components/play_area.gd" id="4_njyw0"]
 [ext_resource type="Script" path="res://components/unit_grid.gd" id="4_pl5io"]
 [ext_resource type="Script" path="res://components/tile_highlighter.gd" id="6_21bof"]
-[ext_resource type="Script" path="res://data/units/unit_stats.gd" id="8_bitfc"]
 [ext_resource type="Script" path="res://components/unit_mover.gd" id="8_drrqp"]
-[ext_resource type="SpriteFrames" uid="uid://blewab31cws3u" path="res://resources/units/mage.tres" id="9_27fei"]
-[ext_resource type="SpriteFrames" uid="uid://4g537rpfyayw" path="res://resources/units/dwarf.tres" id="9_h785c"]
-[ext_resource type="SpriteFrames" uid="uid://bwne7vi34hsla" path="res://resources/units/cleric.tres" id="11_4pnuu"]
+[ext_resource type="Script" path="res://components/unit_spawner.gd" id="13_nfnyr"]
 
 [sub_resource type="Curve" id="Curve_jc1be"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.252055, 1), 0.0, 0.0, 0, 0, Vector2(0.745206, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -38,27 +34,6 @@ color = Color(1, 1, 1, 0.478431)
 [sub_resource type="AtlasTexture" id="AtlasTexture_0x16l"]
 atlas = ExtResource("2_6rot1")
 region = Rect2(24, 144, 24, 24)
-
-[sub_resource type="Resource" id="Resource_1vtar"]
-script = ExtResource("8_bitfc")
-name = &"Dwarf"
-rarity = 0
-cost = 1
-skin = ExtResource("9_h785c")
-
-[sub_resource type="Resource" id="Resource_72wrh"]
-script = ExtResource("8_bitfc")
-name = &"Mage"
-rarity = 0
-cost = 1
-skin = ExtResource("9_27fei")
-
-[sub_resource type="Resource" id="Resource_d6uuq"]
-script = ExtResource("8_bitfc")
-name = &"Cleric"
-rarity = 0
-cost = 1
-skin = ExtResource("11_4pnuu")
 
 [node name="Arena" type="Node2D"]
 script = ExtResource("1_lfpdc")
@@ -127,17 +102,6 @@ tile_set = ExtResource("1_mj7k1")
 script = ExtResource("4_pl5io")
 size = Vector2i(15, 1)
 
-[node name="Unit" parent="Bench/BenchUnitGrid" instance=ExtResource("4_inhep")]
-stats = SubResource("Resource_1vtar")
-
-[node name="Unit2" parent="Bench/BenchUnitGrid" instance=ExtResource("4_inhep")]
-position = Vector2(48, 0)
-stats = SubResource("Resource_72wrh")
-
-[node name="Unit3" parent="Bench/BenchUnitGrid" instance=ExtResource("4_inhep")]
-position = Vector2(24, 0)
-stats = SubResource("Resource_d6uuq")
-
 [node name="TileHighlighter" type="Node" parent="Bench" node_paths=PackedStringArray("play_area", "highlight_layer")]
 script = ExtResource("6_21bof")
 play_area = NodePath("..")
@@ -146,3 +110,8 @@ highlight_layer = NodePath("../Highlight")
 [node name="UnitMover" type="Node" parent="." node_paths=PackedStringArray("play_areas")]
 script = ExtResource("8_drrqp")
 play_areas = [NodePath("../GameArea"), NodePath("../Bench")]
+
+[node name="UnitSpawner" type="Node" parent="." node_paths=PackedStringArray("bench", "game_area")]
+script = ExtResource("13_nfnyr")
+bench = NodePath("../Bench")
+game_area = NodePath("../GameArea")
