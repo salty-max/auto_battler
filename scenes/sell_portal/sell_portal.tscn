@@ -1,0 +1,84 @@
+[gd_scene load_steps=10 format=3 uid="uid://dnnn6xljrrp6f"]
+
+[ext_resource type="Material" uid="uid://d3l38sjp3xwi4" path="res://resources/shaders/2d_outline_shader.tres" id="1_0ctn8"]
+[ext_resource type="Script" path="res://scenes/sell_portal/sell_portal.gd" id="1_3mpxe"]
+[ext_resource type="Texture2D" uid="uid://c1uy7765n88ea" path="res://assets/art/world.png" id="2_a8hp2"]
+[ext_resource type="Script" path="res://components/outline_highlighter.gd" id="3_osvvh"]
+[ext_resource type="Texture2D" uid="uid://dtnuym2vd6dds" path="res://assets/art/items.png" id="5_c62mw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_srtwk"]
+atlas = ExtResource("2_a8hp2")
+region = Rect2(816, 168, 24, 24)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bqqte"]
+radius = 16.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_gno0q"]
+shadow_size = 2
+shadow_color = Color(0, 0, 0, 0.564706)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aittx"]
+atlas = ExtResource("5_c62mw")
+region = Rect2(144, 64, 16, 16)
+
+[node name="SellPortal" type="Area2D"]
+script = ExtResource("1_3mpxe")
+metadata/_edit_group_ = true
+
+[node name="Visuals" type="CanvasGroup" parent="."]
+material = ExtResource("1_0ctn8")
+
+[node name="Sprite" type="Sprite2D" parent="Visuals"]
+position = Vector2(12, 12)
+texture = SubResource("AtlasTexture_srtwk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(12, 12)
+shape = SubResource("CircleShape2D_bqqte")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -1.0
+offset_top = 28.0
+offset_right = 23.0
+offset_bottom = 46.0
+text = "sell"
+label_settings = SubResource("LabelSettings_gno0q")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Gold" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+offset_left = -2.0
+offset_top = 42.0
+offset_right = 27.0
+offset_bottom = 60.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 3
+alignment = 1
+
+[node name="GoldLabel" type="Label" parent="Gold"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "1"
+label_settings = SubResource("LabelSettings_gno0q")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GoldIcon" type="TextureRect" parent="Gold"]
+custom_minimum_size = Vector2(12, 12)
+layout_mode = 2
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_aittx")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="OutlineHighlighter" type="Node" parent="." node_paths=PackedStringArray("visuals")]
+script = ExtResource("3_osvvh")
+visuals = NodePath("../Visuals")
+outline_color = Color(0.639216, 0.807843, 0.152941, 1)
+outline_thickness = 2
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]

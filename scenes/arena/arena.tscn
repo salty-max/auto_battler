@@ -1,11 +1,13 @@
-[gd_scene load_steps=13 format=4 uid="uid://c7po0bvkpny7r"]
+[gd_scene load_steps=15 format=4 uid="uid://c7po0bvkpny7r"]
 
 [ext_resource type="Script" path="res://scenes/arena/arena.gd" id="1_lfpdc"]
 [ext_resource type="TileSet" uid="uid://ci4jjclvoqnag" path="res://resources/tilesets/tileset.tres" id="1_mj7k1"]
-[ext_resource type="Texture2D" uid="uid://vdmaywa3xflt" path="res://art/fx.png" id="2_6rot1"]
+[ext_resource type="Texture2D" uid="uid://vdmaywa3xflt" path="res://assets/art/fx.png" id="2_6rot1"]
 [ext_resource type="Script" path="res://components/play_area.gd" id="4_njyw0"]
 [ext_resource type="Script" path="res://components/unit_grid.gd" id="4_pl5io"]
 [ext_resource type="Script" path="res://components/tile_highlighter.gd" id="6_21bof"]
+[ext_resource type="PackedScene" uid="uid://dnnn6xljrrp6f" path="res://scenes/sell_portal/sell_portal.tscn" id="7_20yof"]
+[ext_resource type="Resource" uid="uid://bxawdyd3q8c1y" path="res://data/player/player_stats.tres" id="8_a30k6"]
 [ext_resource type="Script" path="res://components/unit_mover.gd" id="8_drrqp"]
 [ext_resource type="Script" path="res://components/unit_spawner.gd" id="13_nfnyr"]
 
@@ -106,6 +108,10 @@ size = Vector2i(15, 1)
 script = ExtResource("6_21bof")
 play_area = NodePath("..")
 highlight_layer = NodePath("../Highlight")
+
+[node name="SellPortal" parent="." instance=ExtResource("7_20yof")]
+position = Vector2(72, 264)
+player_stats = ExtResource("8_a30k6")
 
 [node name="UnitMover" type="Node" parent="." node_paths=PackedStringArray("play_areas")]
 script = ExtResource("8_drrqp")

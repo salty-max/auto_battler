@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://dadkgrrej4p0w"]
 
 [ext_resource type="Script" path="res://scenes/unit/unit.gd" id="1_bm661"]
-[ext_resource type="Texture2D" uid="uid://c1uy7765n88ea" path="res://art/world.png" id="2_3srey"]
+[ext_resource type="Texture2D" uid="uid://c1uy7765n88ea" path="res://assets/art/world.png" id="2_3srey"]
 [ext_resource type="Resource" uid="uid://buxahxn4blr06" path="res://data/units/cleric/cleric.tres" id="2_hnddb"]
 [ext_resource type="Material" uid="uid://d3l38sjp3xwi4" path="res://resources/shaders/2d_outline_shader.tres" id="3_bv3ea"]
 [ext_resource type="StyleBox" uid="uid://blkoveq2i7hlg" path="res://resources/styleboxes/unit_bar_background.tres" id="3_qndxa"]
@@ -37,6 +37,7 @@ position = Vector2(12, 8)
 sprite_frames = ExtResource("5_f1v3o")
 animation = &"active"
 autoplay = "idle"
+frame_progress = 0.503516
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

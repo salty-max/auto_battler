@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="UnitStats" load_steps=3 format=3 uid="uid://b1k4s8nijjcas"]
+
+[ext_resource type="Script" path="res://data/units/unit_stats.gd" id="1_csqnr"]
+[ext_resource type="SpriteFrames" uid="uid://uomlf27o7erh" path="res://resources/units/dark_elf_mage.tres" id="2_v15t1"]
+
+[resource]
+script = ExtResource("1_csqnr")
+name = &"Dark Elf Mage"
+rarity = 1
+gold_cost = 2
+tier = 1
+skin = ExtResource("2_v15t1")

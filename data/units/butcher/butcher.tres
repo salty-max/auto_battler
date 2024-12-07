@@ -5,7 +5,8 @@
 
 [resource]
 script = ExtResource("1_tcye4")
-name = &""
+name = &"Butcher"
 rarity = 1
-cost = 1
+gold_cost = 2
+tier = 1
 skin = ExtResource("2_r13h8")

@@ -6,6 +6,7 @@
 [resource]
 script = ExtResource("1_mdeoq")
 name = &"Cleric"
-rarity = 0
-cost = 1
+rarity = 2
+gold_cost = 3
+tier = 1
 skin = ExtResource("2_npa4a")
