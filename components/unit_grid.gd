@@ -12,7 +12,6 @@ func _ready() -> void:
 	for row in size.y:
 		for col in size.x:
 			units[Vector2i(col, row)] = null
-	add_unit(Vector2i(0,0), $"../../Bench/Unit")
 	#_debug()
 
 
@@ -24,12 +23,19 @@ func get_all_units() -> Array[Unit]:
 	return result
 
 
+func get_unit(tile: Vector2i) -> Unit:
+	return units[tile]
+
+
 func add_unit(tile: Vector2i, unit: Unit) -> void:
 	units[tile] = unit
 	unit_grid_changed.emit()
 
 
 func remove_unit(tile: Vector2i) -> void:
+	var unit := units[tile] as Unit
+	if not unit:
+		return
 	units[tile] = null
 	unit_grid_changed.emit()
 

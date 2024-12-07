@@ -19,6 +19,8 @@ func _ready() -> void:
 		drag_and_drop.drag_canceled.connect(_on_drag_canceled)
 		drag_and_drop.dropped.connect(_on_dropped)
 
+	skin.play("active")
+
 
 func set_stats(value: UnitStats) -> void:
 	stats = value
@@ -31,9 +33,11 @@ func set_stats(value: UnitStats) -> void:
 		await ready
 
 	skin.sprite_frames = stats.skin
+	skin.play("active")
 
 
-func reset_after_drag(starting_pos: Vector2) -> void:
+func reset_after_dragging(starting_pos: Vector2) -> void:
+	skin.play("active")
 	velocity_based_rotation.enabled = false
 	global_position = starting_pos
 
@@ -55,15 +59,17 @@ func _on_mouse_exited() -> void:
 
 
 func _on_drag_started() -> void:
+	skin.play("idle")
 	shadow.visible = false
 	velocity_based_rotation.enabled = true
 
 
 func _on_drag_canceled(starting_pos: Vector2) -> void:
 	shadow.visible = true
-	reset_after_drag(starting_pos)
+	reset_after_dragging(starting_pos)
 
 
 func _on_dropped(_starting_pos: Vector2) -> void:
+	skin.play("active")
 	shadow.visible = true
 	velocity_based_rotation.enabled = false
